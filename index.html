@@ -2,10 +2,28 @@
 <html>
 <head>
 	<title>Interactive PID</title>
-	<script type="text/javascript" src="pid.js"></script>
 	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/lodash@4/lodash.min.js"></script>
 </head>
 <body>
+	<canvas id="graph"></canvas>
+	<div class="slider-container">
 
+		<label class="pid-slider-label" for="p-slider">P</label>
+		<input class="pid-slider" id="p-slider" name="p-slider" type="range" min="0" max="10" step="0.01" value="0">
+		<span class="pid-slider-value" id="p-value">0</span><br>
+
+		<label class="pid-slider-label" for="i-slider">I</label>
+		<input class="pid-slider" id="i-slider" name="i-slider" type="range" min="0" max="10" step="0.01" value="0">
+		<span class="pid-slider-value" id="i-value">0</span><br>
+
+		<label class="pid-slider-label" for="d-slider">D</label>
+		<input class="pid-slider" id="d-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
+		<span class="pid-slider-value" id="d-value">0</span>
+
+	</div>
+	<script type="text/javascript" src="pid.js"></script>
 </body>
 </html>

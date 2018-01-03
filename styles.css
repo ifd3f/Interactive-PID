@@ -1,0 +1,42 @@
+.slider-container {
+	width: 100%;
+}
+
+.pid-slider-label {
+	font-family: monospace;
+	font-size: 16pt;
+	line-height: 1;
+}
+
+.pid-slider-value {
+	font-family: monospace;
+	font-size: 12pt;
+	line-height: 1;
+}
+
+.pid-slider {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 80%;
+	height: 10px;
+	background: #d3d3d3;
+	opacity: 0.7;
+	-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+.pid-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 10px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    background: #03df44; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.pid-slider::-moz-range-thumb {
+    width: 10px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    background: #03df44; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
