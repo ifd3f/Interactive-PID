@@ -231,7 +231,7 @@ $(function() {
                     pointRadius: 2,
                 },
                 {
-                    label: "d/dx Target",
+                    label: "Target Derivative",
                     borderColor: "rgb(0,128,255)",
                     fill: false,
                     data: dsDTarget,                 
@@ -246,7 +246,7 @@ $(function() {
             title: {
                 display: true,
                 type: "linear",
-                text: "Position over time",
+                text: "Velocity over time",
                 fontColor: LABEL_COLOR
             },
             legend: {
@@ -288,7 +288,7 @@ $(function() {
             labels: frames,
             datasets: [
                 {
-                    label: "Raw PID",
+                    label: "Raw PID Output",
                     fill: false,
                     borderColor: "rgb(255, 255, 0)",
                     data: dsOutput,                 
@@ -310,7 +310,7 @@ $(function() {
             title: {
                 display: true,
                 type: "linear",
-                text: "Position over time",
+                text: "Force over time",
                 fontColor: LABEL_COLOR
             },
             legend: {

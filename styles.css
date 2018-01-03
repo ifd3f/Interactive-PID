@@ -14,24 +14,33 @@ button {
 	font-size: 12pt;
 }
 
+.formula-input {
+	background-color: #202020;
+	font: 10pt monospace;
+	border-width: 0;
+	padding: 4px;
+}
+
 .main-container {
 	margin: auto;
     width: 80%;
     height: 100%;
     max-width: 800px;
+    min-width: 600px;
     padding: 10px;
 }
 
 .pid-parameters {
 	margin: auto;
 	padding: 10px;
-	border: 5px solid #111111;
+	border: 3px solid #111111;
 	border-radius: 10px;
 	background-color: #303030;
 	width: 90%;
 }
 
 .slider-container {
+	margin: auto;
 	width: 100%;
     margin-bottom: 5px;
 }
@@ -45,11 +54,10 @@ button {
 	margin: auto;
 	margin-bottom: 10px;
 	background-color: #222222;
-	border: 5px solid #111111;
-	border-radius: 5px;
-	padding: 5px;
+	border: 3px solid #111111;
+	border-radius: 10px;
+	padding: 10px;
 	width: 90%;
-	height: 10%;
 }
 
 h1 {
@@ -70,7 +78,7 @@ h2 {
 }
 
 .number-text {
-	font: 12pt monospace;
+	font: 14pt monospace;
 }
 
 .pid-slider-value {
@@ -82,7 +90,7 @@ h2 {
 .pid-slider {
 	-webkit-appearance: none;
 	appearance: none;
-	width: 90%;
+	width: 85%;
 	height: 10px;
 	background: #b0b0b0;
 	opacity: 0.7;
