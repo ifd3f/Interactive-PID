@@ -1,47 +1,68 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
 	<title>Interactive PID</title>
 	<link rel="stylesheet" href="styles.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4/lodash.min.js"></script>
-</head>
-<body>
-	<div>
-		<canvas class="simulation-canvas" width="100vw" height="20vw" id="graphPos"></canvas>
-	</div>
-	
-	<div>
-		<canvas class="simulation-canvas" width="100vw" height="20vw" id="graphVel"></canvas>
-	</div>
-
-	<div>
-		<canvas class="simulation-canvas" width="100vw" height="20vw" id="graphForce"></canvas>
-	</div>
-
-	<div class="slider-container">
-
-		<label class="pid-slider-label" for="p-slider">P</label>
-		<input class="pid-slider" id="p-slider" name="p-slider" type="range" min="0" max="10" step="0.01" value="0">
-		<span class="pid-slider-value" id="p-value">0</span><br>
-
-		<label class="pid-slider-label" for="i-slider">I</label>
-		<input class="pid-slider" id="i-slider" name="i-slider" type="range" min="0" max="10" step="0.01" value="0">
-		<span class="pid-slider-value" id="i-value">0</span><br>
-
-		<label class="pid-slider-label" for="d-slider">D</label>
-		<input class="pid-slider" id="d-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
-		<span class="pid-slider-value" id="d-value">0</span><br>
-
-		<label class="pid-slider-label" for="f-slider">F</label>
-		<input class="pid-slider" id="f-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
-		<span class="pid-slider-value" id="f-value">0</span><br>
-
-		<label for="target-function">Target function (note: this thing literally just gets eval'd) s(t) = </label>
-		<input id="target-function" type="text" name="target-function" value="1">
-		<button onclick="updateTargetFunction()">Submit</button>
-	</div>
 	<script type="text/javascript" src="pid.js"></script>
+</head>
+
+<body>
+
+	<div class="main-container">
+
+		<div class="canvas-container">
+			<canvas class="simulation-canvas" width="100vw" height="30vw" id="graphPos"></canvas>
+		</div>
+		
+		<div class="canvas-container">
+			<canvas class="simulation-canvas" width="100vw" height="30vw" id="graphVel"></canvas>
+		</div>
+
+		<div class="canvas-container">
+			<canvas class="simulation-canvas" width="100vw" height="30vw" id="graphForce"></canvas>
+		</div>
+
+		<div class="pid-parameters">
+			<h1>Parameters</h1>
+			<div class="slider-container">
+				<label class="label-text" for="p-slider">P</label>
+				<input class="pid-slider" id="p-slider" name="p-slider" type="range" min="0" max="10" step="0.01" value="0">
+				<span class="info-text" id="p-value">0</span>
+			</div>
+
+			<div class="slider-container">
+				<label class="label-text" for="i-slider">I</label>
+				<input class="pid-slider" id="i-slider" name="i-slider" type="range" min="0" max="10" step="0.01" value="0">
+				<span class="info-text" id="i-value">0</span>
+			</div>
+
+			<div class="slider-container">
+				<label class="label-text" for="d-slider">D</label>
+				<input class="pid-slider" id="d-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
+				<span class="info-text" id="d-value">0</span>
+
+			<div class="slider-container">
+				<label class="label-text" for="f-slider">F</label>
+				<input class="pid-slider" id="f-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
+				<span class="info-text" id="f-value">0</span>
+			</div>
+		</div>
+
+		<div>
+			<span class="label-text">Target function</span><br>
+			<span class="info-text">(note: this thing literally just gets eval'd)</span><br>
+			<label for="target-function" class="info-text">s(t) = </label>
+			<input id="target-function" type="text" name="target-function" value="1">
+			<button onclick="updateTargetFunction()">Submit</button>
+		</div>
+
+	</div>
+
 </body>
+
 </html>

@@ -1,42 +1,79 @@
+body {
+	background-color: #222222
+}
+
+.main-container {
+	margin: auto;
+    width: 80%;
+    height: 100%;
+    padding: 10px;
+}
+
+.pid-parameters {
+	margin: auto;
+	padding: 10px;
+	border: 5px solid #111111;
+	border-radius: 10px;
+	background-color: #303030;
+	width: 100%;
+}
+
 .slider-container {
 	width: 100%;
 }
 
-.pid-slider-label {
-	font-family: monospace;
-	font-size: 16pt;
+.canvas-container {
+	margin: auto;
+	width: 80%;
+	height: 10%;
+}
+
+h1 {
+	font: 20pt monospace;
+	color: white;
+	line-height: 0.5;
+}
+
+.label-text {
+	font: 16pt monospace;
+	color: white;
 	line-height: 1;
 }
 
+.info-text {
+	font: 12pt monospace;
+	color: white;
+}
+
 .pid-slider-value {
-	font-family: monospace;
-	font-size: 12pt;
+	font: 12pt monospace;
+	color: white;
 	line-height: 1;
 }
 
 .pid-slider {
 	-webkit-appearance: none;
 	appearance: none;
-	width: 80%;
+	width: 90%;
 	height: 10px;
-	background: #d3d3d3;
+	background: #b0b0b0;
 	opacity: 0.7;
-	-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+	-webkit-transition: .2s;
     transition: opacity .2s;
 }
 
 .pid-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
+    -webkit-appearance: none;
     appearance: none;
-    width: 10px; /* Set a specific slider handle width */
-    height: 20px; /* Slider handle height */
-    background: #03df44; /* Green background */
-    cursor: pointer; /* Cursor on hover */
+    width: 10px;
+    height: 20px;
+    background: #ffffff;
+    cursor: pointer;
 }
 
 .pid-slider::-moz-range-thumb {
-    width: 10px; /* Set a specific slider handle width */
-    height: 20px; /* Slider handle height */
-    background: #03df44; /* Green background */
-    cursor: pointer; /* Cursor on hover */
+    width: 10px;
+    height: 20px;
+    background: #ffffff;
+    cursor: pointer;
 }

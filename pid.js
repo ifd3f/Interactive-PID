@@ -125,6 +125,8 @@ function updateTargetFunction() {
 
 const DURATION = 20;
 const FREQUENCY = 10;
+const LABEL_COLOR = "rgb(255,255,255)";
+const GRID_COLOR = "rgb(128,128,128)"
 
 var target = "1";
 
@@ -179,20 +181,35 @@ $(function() {
             title: {
                 display: true,
                 type: "linear",
-                text: "Position over time"
+                text: "Position over time",
+                fontColor: LABEL_COLOR
+            },
+            legend: {
+                labels: {
+                    fontColor: LABEL_COLOR
+                }
             },
             scales: {
                 xAxes: [{
                     display: true,
                     ticks: {
-                        maxTicksLimit: 50
-                    }
+                        maxTicksLimit: 50,
+                        fontColor: LABEL_COLOR
+                    },
+                    gridLines: {
+                        color: GRID_COLOR
+                    },
                 }],
                 yAxes: [{
                     type: "linear",
                     display: true,
                     position: "left",
-                    labelString: "Position (m)"
+                    gridLines: {
+                        color: GRID_COLOR
+                    },
+                    ticks: {
+                        fontColor: LABEL_COLOR
+                    }
                 }]
             }
         }
@@ -228,17 +245,36 @@ $(function() {
             stacked: false,
             title: {
                 display: true,
-                text: "Velocity over time"
+                type: "linear",
+                text: "Position over time",
+                fontColor: LABEL_COLOR
+            },
+            legend: {
+                labels: {
+                    fontColor: LABEL_COLOR
+                }
             },
             scales: {
                 xAxes: [{
-                    display: true
+                    display: true,
+                    ticks: {
+                        maxTicksLimit: 50,
+                        fontColor: LABEL_COLOR
+                    },
+                    gridLines: {
+                        color: GRID_COLOR
+                    },
                 }],
                 yAxes: [{
                     type: "linear",
                     display: true,
                     position: "left",
-                    labelString: "Velocity (m/s)"
+                    gridLines: {
+                        color: GRID_COLOR
+                    },
+                    ticks: {
+                        fontColor: LABEL_COLOR
+                    }
                 }]
             }
         }
@@ -273,14 +309,36 @@ $(function() {
             stacked: false,
             title: {
                 display: true,
-                text: "Force Outputs"
+                type: "linear",
+                text: "Position over time",
+                fontColor: LABEL_COLOR
+            },
+            legend: {
+                labels: {
+                    fontColor: LABEL_COLOR
+                }
             },
             scales: {
+                xAxes: [{
+                    display: true,
+                    ticks: {
+                        maxTicksLimit: 50,
+                        fontColor: LABEL_COLOR
+                    },
+                    gridLines: {
+                        color: GRID_COLOR
+                    },
+                }],
                 yAxes: [{
                     type: "linear",
                     display: true,
                     position: "left",
-                    labelString: "Force (N)"
+                    gridLines: {
+                        color: GRID_COLOR
+                    },
+                    ticks: {
+                        fontColor: LABEL_COLOR
+                    }
                 }]
             }
         }
