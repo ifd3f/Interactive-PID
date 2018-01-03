@@ -81,7 +81,7 @@ function updateChart(pidArgs) {
     var simulationArgs = {
         pid: pidArgs,
         target: function(t) {
-            return 1
+            return eval(target);
         },
         duration: 20,
         frequency: 10,
@@ -100,8 +100,15 @@ function updateChart(pidArgs) {
     graphForce.update();
 }
 
+function updateTargetFunction() {
+    target = $("#target-function").val();
+    onSliderChange();
+}
+
 const DURATION = 20;
 const FREQUENCY = 10;
+
+var target = "1";
 
 var ctxPos, ctxVel, ctxForce, graphPos, graphVel, graphForce;
 

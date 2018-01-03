@@ -32,8 +32,11 @@
 
 		<label class="pid-slider-label" for="d-slider">D</label>
 		<input class="pid-slider" id="d-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
-		<span class="pid-slider-value" id="d-value">0</span>
+		<span class="pid-slider-value" id="d-value">0</span><br>
 
+		<label for="target-function">Target function (note: this thing literally just gets eval'd) s(t) = </label>
+		<input id="target-function" type="text" name="target-function" value="1">
+		<button onclick="updateTargetFunction()">Submit</button>
 	</div>
 	<script type="text/javascript" src="pid.js"></script>
 </body>
