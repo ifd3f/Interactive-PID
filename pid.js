@@ -159,14 +159,16 @@ $(function() {
                     //backgroundColor: "rgb(255,0,0)",
                     borderColor: "rgb(255,0,0)",
                     fill: false,
-                    data: dsPos
+                    data: dsPos,
+                    pointRadius: 2
                 },
                 {
                     label: "Target",
                     //backgroundColor: "rgb(0,0,255)",
                     borderColor: "rgb(0,0,255)",
                     fill: false,
-                    data: dsTarget
+                    data: dsTarget,
+                    pointRadius: 2
                 },
             ]
         },
@@ -176,13 +178,21 @@ $(function() {
             stacked: false,
             title: {
                 display: true,
+                type: "linear",
                 text: "Position over time"
             },
             scales: {
+                xAxes: [{
+                    display: true,
+                    ticks: {
+                        maxTicksLimit: 50
+                    }
+                }],
                 yAxes: [{
                     type: "linear",
                     display: true,
-                    position: "left"
+                    position: "left",
+                    labelString: "Position (m)"
                 }]
             }
         }
@@ -200,13 +210,15 @@ $(function() {
                     label: "Velocity",
                     borderColor: "rgb(0,128,0)",
                     fill: false,
-                    data: dsVel
+                    data: dsVel,
+                    pointRadius: 2,
                 },
                 {
                     label: "d/dx Target",
                     borderColor: "rgb(0,128,255)",
                     fill: false,
-                    data: dsDTarget                   
+                    data: dsDTarget,                 
+                    pointRadius: 2,
                 }
             ]
         },
@@ -219,10 +231,14 @@ $(function() {
                 text: "Velocity over time"
             },
             scales: {
+                xAxes: [{
+                    display: true
+                }],
                 yAxes: [{
                     type: "linear",
                     display: true,
-                    position: "left"
+                    position: "left",
+                    labelString: "Velocity (m/s)"
                 }]
             }
         }
@@ -239,13 +255,15 @@ $(function() {
                     label: "Raw PID",
                     fill: false,
                     borderColor: "rgb(255, 255, 0)",
-                    data: dsOutput
+                    data: dsOutput,                 
+                    pointRadius: 2
                 },
                 {
                     label: "Constrained Force",
                     borderColor: "rgb(255, 0, 255)",
                     fill: false,
-                    data: dsForce
+                    data: dsForce,                 
+                    pointRadius: 2
                 }
             ]
         },
@@ -261,7 +279,8 @@ $(function() {
                 yAxes: [{
                     type: "linear",
                     display: true,
-                    position: "left"
+                    position: "left",
+                    labelString: "Force (N)"
                 }]
             }
         }
