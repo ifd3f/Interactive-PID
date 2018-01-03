@@ -111,9 +111,6 @@ $(function() {
     $(".pid-slider").each(function() {
         $(this)[0].oninput = onSliderChange;
     });
-    $(".pid-graph").each(function() {
-        $(this)[0].height = 75;
-    })
 
     var frames = _.range(0, DURATION, 1 / FREQUENCY).map(function(t) {
         return Math.round(t * 100) / 100;
@@ -153,7 +150,7 @@ $(function() {
             stacked: false,
             title: {
                 display: true,
-                text: "PID Position Outputs"
+                text: "Position over time"
             },
             scales: {
                 yAxes: [{
@@ -174,6 +171,7 @@ $(function() {
             labels: frames,
             datasets: [{
                 label: "Velocity",
+                borderColor: "rgb(0,128,0)",
                 fill: false,
                 data: dsVel
             }]
@@ -184,7 +182,7 @@ $(function() {
             stacked: false,
             title: {
                 display: true,
-                text: "PID Outputs"
+                text: "Velocity over time"
             },
             scales: {
                 yAxes: [{
@@ -206,10 +204,12 @@ $(function() {
                 {
                     label: "Raw PID",
                     fill: false,
+                    borderColor: "rgb(255, 255, 0)",
                     data: dsOutput
                 },
                 {
                     label: "Constrained Force",
+                    borderColor: "rgb(255, 0, 255)",
                     fill: false,
                     data: dsForce
                 }
@@ -221,7 +221,7 @@ $(function() {
             stacked: false,
             title: {
                 display: true,
-                text: "PID Outputs"
+                text: "Force Outputs"
             },
             scales: {
                 yAxes: [{

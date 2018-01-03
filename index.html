@@ -9,29 +9,29 @@
 </head>
 <body>
 	<div>
-		<canvas class="pid-graph" id="graphPos"></canvas>
+		<canvas height="85" id="graphPos"></canvas>
 	</div>
 	
 	<div>
-		<canvas class="pid-graph" id="graphVel"></canvas>
+		<canvas height="85" id="graphVel"></canvas>
 	</div>
 
 	<div>
-		<canvas class="pid-graph" id="graphForce"></canvas>
+		<canvas height="85" id="graphForce"></canvas>
 	</div>
 
 	<div class="slider-container">
 
 		<label class="pid-slider-label" for="p-slider">P</label>
-		<input class="pid-slider" id="p-slider" name="p-slider" type="range" min="0" max="5" step="0.01" value="0">
+		<input class="pid-slider" id="p-slider" name="p-slider" type="range" min="0" max="10" step="0.01" value="0">
 		<span class="pid-slider-value" id="p-value">0</span><br>
 
 		<label class="pid-slider-label" for="i-slider">I</label>
-		<input class="pid-slider" id="i-slider" name="i-slider" type="range" min="0" max="5" step="0.01" value="0">
+		<input class="pid-slider" id="i-slider" name="i-slider" type="range" min="0" max="10" step="0.01" value="0">
 		<span class="pid-slider-value" id="i-value">0</span><br>
 
 		<label class="pid-slider-label" for="d-slider">D</label>
-		<input class="pid-slider" id="d-slider" name="d-slider" type="range" min="0" max="5" step="0.01" value="0">
+		<input class="pid-slider" id="d-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
 		<span class="pid-slider-value" id="d-value">0</span>
 
 	</div>
