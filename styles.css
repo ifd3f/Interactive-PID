@@ -1,11 +1,24 @@
 body {
-	background-color: #222222
+	background-color: #333333
+}
+
+* {
+	font-family: sans-serif;
+	color: white;
+}
+
+button {
+	background-color: #202020;
+	border-color: #000000;
+	border-radius: 5px;
+	font-size: 12pt;
 }
 
 .main-container {
 	margin: auto;
     width: 80%;
     height: 100%;
+    max-width: 800px;
     padding: 10px;
 }
 
@@ -15,34 +28,49 @@ body {
 	border: 5px solid #111111;
 	border-radius: 10px;
 	background-color: #303030;
-	width: 100%;
+	width: 90%;
 }
 
 .slider-container {
 	width: 100%;
+    margin-bottom: 5px;
 }
 
-.canvas-container {
+.sliders {
+	margin: 5px;
+	margin-bottom: 10px;
+}
+
+.graphs-container {
 	margin: auto;
-	width: 80%;
+	margin-bottom: 10px;
+	background-color: #222222;
+	border: 5px solid #111111;
+	border-radius: 5px;
+	padding: 5px;
+	width: 90%;
 	height: 10%;
 }
 
 h1 {
-	font: 20pt monospace;
-	color: white;
-	line-height: 0.5;
+	font-size: 32pt;
+}
+
+h2 {
+	font-size: 20pt;
 }
 
 .label-text {
-	font: 16pt monospace;
-	color: white;
+	font-size: 16pt;
 	line-height: 1;
 }
 
 .info-text {
+	font-size: 12pt;
+}
+
+.number-text {
 	font: 12pt monospace;
-	color: white;
 }
 
 .pid-slider-value {
