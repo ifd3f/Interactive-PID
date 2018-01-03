@@ -111,6 +111,9 @@ $(function() {
     $(".pid-slider").each(function() {
         $(this)[0].oninput = onSliderChange;
     });
+    $(".pid-graph").each(function() {
+        $(this)[0].height = 75;
+    })
 
     var frames = _.range(0, DURATION, 1 / FREQUENCY).map(function(t) {
         return Math.round(t * 100) / 100;
