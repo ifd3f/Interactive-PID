@@ -15,18 +15,27 @@ PID.prototype.push = function(error, dt) {
     return out;
 };
 
+function derivative(fun) {
+    var h = 0.00000001;
+    return function(x) {
+        return (fun(x + h) - fun(x)) / h;
+    };
+}
+
 function simulate(args) {
     var pid = new PID(args.pid.p, args.pid.i, args.pid.d);
     const dt = 1 / args.frequency;
     const frames = _.range(0, args.duration, dt).map(function(t) {
         return Math.round(t * 100) / 100;
     });
+    const dtarget = derivative(args.target);
 
     var x = 0;
     var v = 0;
 
     var x_ = [];
     var v_ = [];
+    var d_ = [];
     var f_ = [];
     var p_ = [];
     var t_ = [];
@@ -34,7 +43,8 @@ function simulate(args) {
     for (var i = 0; i <= frames.length; i++) {
         var t = frames[i];
         const target = args.target(t);
-        const raw = pid.push(target - x, dt);
+        const deriv = dtarget(t);
+        const raw = pid.push(target - x, dt) + args.pid.f * deriv;
 
         const force = Math.min(Math.max(raw, -args.forceLimit), args.forceLimit);  // Constrain the force
         v += force * dt;
@@ -42,6 +52,7 @@ function simulate(args) {
 
         x_.push(x);
         v_.push(v);
+        d_.push(deriv);
         f_.push(force);
         p_.push(raw);
         t_.push(target);
@@ -53,7 +64,8 @@ function simulate(args) {
         vel: v_, 
         force: f_, 
         pid: p_, 
-        target: t_
+        target: t_,
+        deriv: d_
     };
 }
 
@@ -61,12 +73,14 @@ function onSliderChange() {
     var pid = {
         p: $("#p-slider").val(),
         i: $("#i-slider").val(),
-        d: $("#d-slider").val()
+        d: $("#d-slider").val(),
+        f: $("#f-slider").val()
     };
 
     $("#p-value").text(pid.p);
     $("#i-value").text(pid.i);
     $("#d-value").text(pid.d);
+    $("#f-value").text(pid.f);
 
     updateChart(pid);
 }
@@ -87,10 +101,14 @@ function updateChart(pidArgs) {
         frequency: 10,
         forceLimit: 10
     };
+
+    var startTime = new Date().getMilliseconds();
     var output = simulate(simulationArgs);
+    var completedIn = new Date().getMilliseconds() - startTime;
 
     copyInto(output.pos, dsPos);
     copyInto(output.vel, dsVel);
+    copyInto(output.deriv, dsDTarget);
     copyInto(output.target, dsTarget);
     copyInto(output.force, dsForce);
     copyInto(output.pid, dsOutput);
@@ -112,7 +130,7 @@ var target = "1";
 
 var ctxPos, ctxVel, ctxForce, graphPos, graphVel, graphForce;
 
-var dsPos, dsTarget, dsVel, dsForce, dsOutput;
+var dsPos, dsTarget, dsDTarget, dsVel, dsForce, dsOutput;
 
 $(function() {
     $(".pid-slider").each(function() {
@@ -125,6 +143,7 @@ $(function() {
     dsPos = frames.slice();
     dsTarget = frames.slice();
     dsVel = frames.slice();
+    dsDTarget = frames.slice();
     dsForce = frames.slice();
     dsOutput = frames.slice();
 
@@ -176,12 +195,20 @@ $(function() {
         frames: frames,
         data: {
             labels: frames,
-            datasets: [{
-                label: "Velocity",
-                borderColor: "rgb(0,128,0)",
-                fill: false,
-                data: dsVel
-            }]
+            datasets: [
+                {
+                    label: "Velocity",
+                    borderColor: "rgb(0,128,0)",
+                    fill: false,
+                    data: dsVel
+                },
+                {
+                    label: "d/dx Target",
+                    borderColor: "rgb(0,128,255)",
+                    fill: false,
+                    data: dsDTarget                   
+                }
+            ]
         },
         options: {
             responsive: true,

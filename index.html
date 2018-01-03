@@ -9,15 +9,15 @@
 </head>
 <body>
 	<div>
-		<canvas height="85" id="graphPos"></canvas>
+		<canvas class="simulation-canvas" height="200" id="graphPos"></canvas>
 	</div>
 	
 	<div>
-		<canvas height="85" id="graphVel"></canvas>
+		<canvas class="simulation-canvas" height="200" id="graphVel"></canvas>
 	</div>
 
 	<div>
-		<canvas height="85" id="graphForce"></canvas>
+		<canvas class="simulation-canvas" height="200" id="graphForce"></canvas>
 	</div>
 
 	<div class="slider-container">
@@ -33,6 +33,10 @@
 		<label class="pid-slider-label" for="d-slider">D</label>
 		<input class="pid-slider" id="d-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
 		<span class="pid-slider-value" id="d-value">0</span><br>
+
+		<label class="pid-slider-label" for="f-slider">F</label>
+		<input class="pid-slider" id="f-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
+		<span class="pid-slider-value" id="f-value">0</span><br>
 
 		<label for="target-function">Target function (note: this thing literally just gets eval'd) s(t) = </label>
 		<input id="target-function" type="text" name="target-function" value="1">
