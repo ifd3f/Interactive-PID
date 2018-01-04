@@ -1,3 +1,14 @@
+const DURATION = 20;
+const FREQUENCY = 10;
+const LABEL_COLOR = "rgb(255,255,255)";
+const GRID_COLOR = "rgb(128,128,128)";
+
+var target = "1";
+
+var ctxPos, ctxVel, ctxForce, graphPos, graphVel, graphForce;
+
+var dsPos, dsTarget, dsDTarget, dsVel, dsForce, dsOutput;
+
 function PID(p, i, d) {
     this.p = p;
     this.i = i;
@@ -122,17 +133,6 @@ function updateTargetFunction() {
     target = $("#target-function").val();
     onSliderChange();
 }
-
-const DURATION = 20;
-const FREQUENCY = 10;
-const LABEL_COLOR = "rgb(255,255,255)";
-const GRID_COLOR = "rgb(128,128,128)"
-
-var target = "1";
-
-var ctxPos, ctxVel, ctxForce, graphPos, graphVel, graphForce;
-
-var dsPos, dsTarget, dsDTarget, dsVel, dsForce, dsOutput;
 
 $(function() {
     $(".pid-slider").each(function() {
