@@ -21,6 +21,14 @@ button {
 	padding: 4px;
 }
 
+.number-input {
+	background-color: #202020;
+	font: 10pt monospace;
+	border-width: 0;
+	width: 50px;
+	padding: 4px;
+}
+
 .main-container {
 	margin: auto;
     width: 80%;
@@ -45,7 +53,7 @@ button {
     margin-bottom: 5px;
 }
 
-.sliders {
+.pid-slider-container {
 	margin: 5px;
 	margin-bottom: 10px;
 }

@@ -37,40 +37,63 @@
 
 			<h2>Parameters</h2>
 
-			<div class="sliders">
+			<h3>PID Parameters</h3>
+
+			<div class="pid-slider-container">
 
 				<div class="slider-container">
 					<label class="number-text" for="p-slider">P</label>
-					<input class="pid-slider" id="p-slider" name="p-slider" type="range" min="0" max="30" step="0.01" value="0">
+					<input class="pid-slider" id="p-slider" name="p-slider" type="range" min="0" max="30" step="0.01" value="0" />
 					<span class="number-text" id="p-value">0</span>
 				</div>
 
 				<div class="slider-container">
 					<label class="number-text" for="i-slider">I</label>
-					<input class="pid-slider" id="i-slider" name="i-slider" type="range" min="0" max="3" step="0.01" value="0">
+					<input class="pid-slider" id="i-slider" name="i-slider" type="range" min="0" max="3" step="0.01" value="0" />
 					<span class="number-text" id="i-value">0</span>
 				</div>
 
 				<div class="slider-container">
 					<label class="number-text" for="d-slider">D</label>
-					<input class="pid-slider" id="d-slider" name="d-slider" type="range" min="0" max="30" step="0.01" value="0">
+					<input class="pid-slider" id="d-slider" name="d-slider" type="range" min="0" max="30" step="0.01" value="0" />
 					<span class="number-text" id="d-value">0</span>
 				</div>
 
 				<div class="slider-container">
 					<label class="number-text" for="f-slider">F</label>
-					<input class="pid-slider" id="f-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0">
+					<input class="pid-slider" id="f-slider" name="d-slider" type="range" min="0" max="10" step="0.01" value="0" />
 					<span class="number-text" id="f-value">0</span>
 				</div>
 
 			</div>
 
 			<div>
-				<span class="label-text">Target function</span><br>
+				<h3>Target Function</h3>
 				<span class="info-text">(note: this thing literally just gets eval'd)</span><br>
 				<label for="target-function" class="number-text">s(t) = </label>
 				<input id="target-function" class="formula-input" type="text" name="target-function" value="1">
 				<button onclick="updateTargetFunction()">Submit</button>
+			</div>
+
+			<h3>Simulation Parameters</h3>
+			<div>
+				<ul>
+					<li><label for="sim-length">
+						Run a <input id="sim-length" class="number-input" type="number" name="sim-length" value="20" /> second simulation
+					</label></li>
+					<li><label for="sim-freq">
+						Run simulation at <input id="sim-freq" class="number-input" type="number" name="sim-freq" value="10" /> frames per second
+					</label></li>
+					<li><label for="sim-sample">
+						Graph every <input id="sim-sample" class="number-input" type="number" name="sim-sample" value="1" /> data points
+					</label></li>
+					<li><label for="sim-mass">
+						Use a particle of <input id="sim-mass" class="number-input" type="number" name="sim-mass" value="1" /> kilograms
+					</label></li>
+					<li><label for="sim-force-limit">
+						Limit max thrust to <input id="sim-force-limit" class="number-input" type="number" name="sim-force-limit" value="10" /> Newtons
+					</label></li>
+				</ul>
 			</div>
 
 		</div>

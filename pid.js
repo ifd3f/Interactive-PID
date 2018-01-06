@@ -1,7 +1,9 @@
-const DURATION = 20;
-const FREQUENCY = 10;
 const LABEL_COLOR = "rgb(255,255,255)";
 const GRID_COLOR = "rgb(128,128,128)";
+
+var DURATION = 20;
+var FREQUENCY = 10;
+var SAMPLING = 1;
 
 var target = "1";
 
