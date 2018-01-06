@@ -1,6 +1,6 @@
 const LABEL_COLOR = "rgb(255,255,255)";
 const GRID_COLOR = "rgb(128,128,128)";
-const EPSILON = 0.00000001;
+const EPSILON = 0.000001;
 const SCALE_SETTINGS = {
     xAxes: [{
         display: true,
@@ -31,7 +31,7 @@ var target = "1";
 
 var ctxPos, ctxVel, ctxForce, graphPos, graphVel, graphForce;
 
-var simulationFrames, displayFrames, dsPos, dsTarget, dsDTarget, dsVel, dsForce, dsOutput;
+var simulationFrames, displayFrames, dsPos, dsTarget, dsDTarget, dsD2Target, dsVel, dsForce;
 
 function PID(p, i, d) {
     this.p = p;
@@ -61,15 +61,16 @@ function simulate(args) {
     const dt = 1 / args.frequency;
     
     const dtarget = derivative(args.target);
+    const acctarget = derivative(dtarget);
 
     var x = 0;
     var v = 0;
 
     var x_ = [];
     var v_ = [];
+    var a_ = [];
     var d_ = [];
     var f_ = [];
-    var p_ = [];
     var t_ = [];
 
     for (var i = 0; i <= simulationFrames.length; i++) {
@@ -86,9 +87,9 @@ function simulate(args) {
         if (i % SAMPLING == 0) {
             x_.push(x);
             v_.push(v);
+            a_.push(acctarget(t));
             d_.push(deriv);
-            f_.push(force);
-            p_.push(raw);
+            f_.push(acc);
             t_.push(target);
         }
     }
@@ -98,9 +99,9 @@ function simulate(args) {
         pos: x_, 
         vel: v_, 
         force: f_, 
-        pid: p_, 
         target: t_,
-        deriv: d_
+        deriv: d_,
+        deriv2: a_
     };
 }
 
@@ -145,7 +146,7 @@ function updateGraphOutput() {
     copyInto(output.deriv, dsDTarget);
     copyInto(output.target, dsTarget);
     copyInto(output.force, dsForce);
-    copyInto(output.pid, dsOutput);
+    copyInto(output.deriv2, dsD2Target);
 
     graphPos.update();
     graphVel.update();
@@ -166,6 +167,9 @@ function initializeCharts() {
         type: "line",
         cubicInterpolationMode: "monotone",
         options: {
+            title: {
+                text: "Position over time"
+            },
             scales: SCALE_SETTINGS
         }
     });
@@ -175,6 +179,9 @@ function initializeCharts() {
         cubicInterpolationMode: "monotone",
         frames: displayFrames,
         options: {
+            title: {
+                text: "Velocity over time"
+            },
             scales: SCALE_SETTINGS
         }
     });
@@ -183,6 +190,9 @@ function initializeCharts() {
         type: "line",
         cubicInterpolationMode: "monotone",
         options: {
+            title: {
+                text: "Acceleration over time"
+            },
             scales: SCALE_SETTINGS
         }
     }); 
@@ -208,8 +218,8 @@ function updateSimulationParams() {
     dsTarget = displayFrames.slice();
     dsVel = displayFrames.slice();
     dsDTarget = displayFrames.slice();
+    dsD2Target = displayFrames.slice();
     dsForce = displayFrames.slice();
-    dsOutput = displayFrames.slice();
 
     ctxPos = $("#graphPos");
 
@@ -257,10 +267,17 @@ function updateSimulationParams() {
         labels: displayFrames,
         datasets: [
             {
-                label: "Constrained Force",
+                label: "Acceleration",
                 borderColor: "rgb(255, 0, 255)",
                 fill: false,
                 data: dsForce,                 
+                pointRadius: 2
+            },
+            {
+                label: "Target Acceleration",
+                borderColor: "rgb(255, 255, 0)",
+                fill: false,
+                data: dsD2Target,                 
                 pointRadius: 2
             }
         ]
