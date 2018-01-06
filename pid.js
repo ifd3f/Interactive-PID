@@ -287,6 +287,7 @@ $(function() {
     Chart.defaults.global.title.type = "linear";
     Chart.defaults.global.title.fontColor = LABEL_COLOR;
     Chart.defaults.global.legend.labels.fontColor = LABEL_COLOR;
+    Chart.defaults.global.animation.duration = 250;
 
     initializeCharts();
     updateSimulationParams();
