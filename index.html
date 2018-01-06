@@ -5,7 +5,7 @@
 <head>
 	<title>Interactive PID</title>
 	<link rel="stylesheet" href="styles.css">
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4/lodash.min.js"></script>
 	<script type="text/javascript" src="pid.js"></script>
@@ -30,6 +30,8 @@
 			<div class="graph-container">
 				<canvas class="simulation-canvas" width="100vw" height="30vw" id="graphForce"></canvas>
 			</div>
+
+			<p class="number-text">Completed in <span id="completed-in"></span> ms</p>
 
 		</div>
 
@@ -72,20 +74,20 @@
 				<span class="info-text">(note: this thing literally just gets eval'd)</span><br>
 				<label for="target-function" class="number-text">s(t) = </label>
 				<input id="target-function" class="formula-input" type="text" name="target-function" value="1">
-				<button onclick="updateTargetFunction()">Submit</button>
+				<button onclick="updateGraphOutput()">Submit</button>
 			</div>
 
 			<h3>Simulation Parameters</h3>
 			<div>
 				<ul>
-					<li><label for="sim-length">
-						Run a <input id="sim-length" class="number-input" type="number" name="sim-length" value="20" /> second simulation
+					<li><label for="sim-duration">
+						Run a <input id="sim-duration" class="number-input" type="number" name="sim-duration" value="20" /> second simulation
 					</label></li>
 					<li><label for="sim-freq">
 						Run simulation at <input id="sim-freq" class="number-input" type="number" name="sim-freq" value="10" /> frames per second
 					</label></li>
 					<li><label for="sim-sample">
-						Graph every <input id="sim-sample" class="number-input" type="number" name="sim-sample" value="1" /> data points
+						Graph every <input id="sim-sample" class="number-input" type="number" name="sim-sample" value="2" /> data points
 					</label></li>
 					<li><label for="sim-mass">
 						Use a particle of <input id="sim-mass" class="number-input" type="number" name="sim-mass" value="1" /> kilograms
@@ -94,6 +96,7 @@
 						Limit max thrust to <input id="sim-force-limit" class="number-input" type="number" name="sim-force-limit" value="10" /> Newtons
 					</label></li>
 				</ul>
+				<button onclick="updateSimulationParams()">Update</button>
 			</div>
 
 		</div>
