@@ -1,6 +1,29 @@
 const LABEL_COLOR = "rgb(255,255,255)";
 const GRID_COLOR = "rgb(128,128,128)";
 const EPSILON = 0.00000001;
+const SCALE_SETTINGS = {
+    xAxes: [{
+        display: true,
+        ticks: {
+            maxTicksLimit: 50,
+            fontColor: LABEL_COLOR
+        },
+        gridLines: {
+            color: GRID_COLOR
+        },
+    }],
+    yAxes: [{
+        type: "linear",
+        display: true,
+        position: "left",
+        gridLines: {
+            color: GRID_COLOR
+        },
+        ticks: {
+            fontColor: LABEL_COLOR
+        }
+    }]
+};
 
 var DURATION, FREQUENCY, SAMPLING, MAX_FORCE, mass;
 
@@ -143,43 +166,7 @@ function initializeCharts() {
         type: "line",
         cubicInterpolationMode: "monotone",
         options: {
-            responsive: true,
-            hoverMode: "index",
-            stacked: false,
-            title: {
-                display: true,
-                type: "linear",
-                text: "Position over time",
-                fontColor: LABEL_COLOR
-            },
-            legend: {
-                labels: {
-                    fontColor: LABEL_COLOR
-                }
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    ticks: {
-                        maxTicksLimit: 50,
-                        fontColor: LABEL_COLOR
-                    },
-                    gridLines: {
-                        color: GRID_COLOR
-                    },
-                }],
-                yAxes: [{
-                    type: "linear",
-                    display: true,
-                    position: "left",
-                    gridLines: {
-                        color: GRID_COLOR
-                    },
-                    ticks: {
-                        fontColor: LABEL_COLOR
-                    }
-                }]
-            }
+            scales: SCALE_SETTINGS
         }
     });
     
@@ -188,43 +175,7 @@ function initializeCharts() {
         cubicInterpolationMode: "monotone",
         frames: displayFrames,
         options: {
-            responsive: true,
-            hoverMode: "index",
-            stacked: false,
-            title: {
-                display: true,
-                type: "linear",
-                text: "Velocity over time",
-                fontColor: LABEL_COLOR
-            },
-            legend: {
-                labels: {
-                    fontColor: LABEL_COLOR
-                }
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    ticks: {
-                        maxTicksLimit: 50,
-                        fontColor: LABEL_COLOR
-                    },
-                    gridLines: {
-                        color: GRID_COLOR
-                    },
-                }],
-                yAxes: [{
-                    type: "linear",
-                    display: true,
-                    position: "left",
-                    gridLines: {
-                        color: GRID_COLOR
-                    },
-                    ticks: {
-                        fontColor: LABEL_COLOR
-                    }
-                }]
-            }
+            scales: SCALE_SETTINGS
         }
     });
 
@@ -232,43 +183,7 @@ function initializeCharts() {
         type: "line",
         cubicInterpolationMode: "monotone",
         options: {
-            responsive: true,
-            hoverMode: "index",
-            stacked: false,
-            title: {
-                display: true,
-                type: "linear",
-                text: "Force over time",
-                fontColor: LABEL_COLOR
-            },
-            legend: {
-                labels: {
-                    fontColor: LABEL_COLOR
-                }
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    ticks: {
-                        maxTicksLimit: 50,
-                        fontColor: LABEL_COLOR
-                    },
-                    gridLines: {
-                        color: GRID_COLOR
-                    },
-                }],
-                yAxes: [{
-                    type: "linear",
-                    display: true,
-                    position: "left",
-                    gridLines: {
-                        color: GRID_COLOR
-                    },
-                    ticks: {
-                        fontColor: LABEL_COLOR
-                    }
-                }]
-            }
+            scales: SCALE_SETTINGS
         }
     }); 
     
@@ -342,13 +257,6 @@ function updateSimulationParams() {
         labels: displayFrames,
         datasets: [
             {
-                label: "Raw PID Output",
-                fill: false,
-                borderColor: "rgb(255, 255, 0)",
-                data: dsOutput,                 
-                pointRadius: 2
-            },
-            {
                 label: "Constrained Force",
                 borderColor: "rgb(255, 0, 255)",
                 fill: false,
@@ -371,6 +279,15 @@ $(function() {
             updateGraphOutput();
         }
     });
+
+    // Set chart defaults
+    Chart.defaults.global.responsive = true;
+    Chart.defaults.global.hoverMode = "index";
+    Chart.defaults.global.title.display = true;
+    Chart.defaults.global.title.type = "linear";
+    Chart.defaults.global.title.fontColor = LABEL_COLOR;
+    Chart.defaults.global.legend.labels.fontColor = LABEL_COLOR;
+
     initializeCharts();
     updateSimulationParams();
 });
