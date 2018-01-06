@@ -139,6 +139,12 @@ $(function() {
         $(this)[0].oninput = onSliderChange;
     });
 
+    $("#target-function").on("keydown", function(e) {
+        if (e.keyCode == 13) {
+            updateTargetFunction();
+        }
+    });
+
     var frames = _.range(0, DURATION, 1 / FREQUENCY).map(function(t) {
         return Math.round(t * 100) / 100;
     });
