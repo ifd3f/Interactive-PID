@@ -31,7 +31,32 @@ var target = "1";
 
 var ctxPos, ctxVel, ctxForce, graphPos, graphVel, graphForce;
 
-var simulationFrames, displayFrames, dsPos, dsTarget, dsDTarget, dsD2Target, dsVel, dsForce;
+var simulationFrames, displayFrames;
+var dsParticle, dsTarget;
+
+function MotionDataset() {
+    this.x = [];
+    this.v = [];
+    this.a = [];
+}
+
+MotionDataset.prototype.push = function(x, v, a) {
+    this.x.push(x);
+    this.v.push(v);
+    this.a.push(a);
+};
+
+MotionDataset.prototype.copyFrom = function(other) {
+    copyInto(other.x, this.x);
+    copyInto(other.v, this.v);
+    copyInto(other.a, this.a);
+};
+
+MotionDataset.prototype.populate = function(w) {
+    this.x = w.slice();
+    this.v = w.slice();
+    this.a = w.slice();
+};
 
 function PID(p, i, d) {
     this.p = p;
@@ -66,12 +91,8 @@ function simulate(args) {
     var x = 0;
     var v = 0;
 
-    var x_ = [];
-    var v_ = [];
-    var a_ = [];
-    var d_ = [];
-    var f_ = [];
-    var t_ = [];
+    var dsParticle = new MotionDataset();
+    var dsTarget = new MotionDataset();
 
     for (var i = 0; i <= simulationFrames.length; i++) {
         var t = simulationFrames[i];
@@ -85,23 +106,15 @@ function simulate(args) {
         x += v * dt;
 
         if (i % SAMPLING == 0) {
-            x_.push(x);
-            v_.push(v);
-            a_.push(acctarget(t));
-            d_.push(deriv);
-            f_.push(acc);
-            t_.push(target);
+            dsParticle.push(x, v, acc);
+            dsTarget.push(target, deriv, acctarget(t));
         }
     }
 
     return {
         time: simulationFrames, 
-        pos: x_, 
-        vel: v_, 
-        force: f_, 
-        target: t_,
-        deriv: d_,
-        deriv2: a_
+        particle: dsParticle,
+        target: dsTarget
     };
 }
 
@@ -141,12 +154,8 @@ function updateGraphOutput() {
 
     var output = simulate(simulationArgs);
 
-    copyInto(output.pos, dsPos);
-    copyInto(output.vel, dsVel);
-    copyInto(output.deriv, dsDTarget);
-    copyInto(output.target, dsTarget);
-    copyInto(output.force, dsForce);
-    copyInto(output.deriv2, dsD2Target);
+    dsParticle.copyFrom(output.particle);
+    dsTarget.copyFrom(output.target);
 
     graphPos.update();
     graphVel.update();
@@ -214,12 +223,11 @@ function updateSimulationParams() {
         return i % SAMPLING == 0;
     });
 
-    dsPos = displayFrames.slice();
-    dsTarget = displayFrames.slice();
-    dsVel = displayFrames.slice();
-    dsDTarget = displayFrames.slice();
-    dsD2Target = displayFrames.slice();
-    dsForce = displayFrames.slice();
+    dsParticle = new MotionDataset();
+    dsTarget = new MotionDataset();
+
+    dsParticle.populate(displayFrames);
+    dsTarget.populate(displayFrames);
 
     ctxPos = $("#graphPos");
 
@@ -231,7 +239,7 @@ function updateSimulationParams() {
                 //backgroundColor: "rgb(255,0,0)",
                 borderColor: "rgb(255,0,0)",
                 fill: false,
-                data: dsPos,
+                data: dsParticle.x,
                 pointRadius: 2
             },
             {
@@ -239,7 +247,7 @@ function updateSimulationParams() {
                 //backgroundColor: "rgb(0,0,255)",
                 borderColor: "rgb(0,0,255)",
                 fill: false,
-                data: dsTarget,
+                data: dsTarget.x,
                 pointRadius: 2
             },
         ]
@@ -251,14 +259,14 @@ function updateSimulationParams() {
                 label: "Velocity",
                 borderColor: "rgb(0,128,0)",
                 fill: false,
-                data: dsVel,
+                data: dsParticle.v,
                 pointRadius: 2,
             },
             {
                 label: "Target Derivative",
                 borderColor: "rgb(0,128,255)",
                 fill: false,
-                data: dsDTarget,                 
+                data: dsTarget.v,                 
                 pointRadius: 2,
             }
         ]
@@ -270,14 +278,14 @@ function updateSimulationParams() {
                 label: "Acceleration",
                 borderColor: "rgb(255, 0, 255)",
                 fill: false,
-                data: dsForce,                 
+                data: dsParticle.a,                 
                 pointRadius: 2
             },
             {
                 label: "Target Acceleration",
                 borderColor: "rgb(255, 255, 0)",
                 fill: false,
-                data: dsD2Target,                 
+                data: dsTarget.a,                 
                 pointRadius: 2
             }
         ]
