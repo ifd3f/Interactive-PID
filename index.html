@@ -89,6 +89,14 @@
 				<button onclick="updateGraphOutput()">Submit</button>
 			</div>
 
+			<div>
+				<h3>Friction Function</h3>
+				<span class="info-text">(Also gets eval'd, also absolute value around it)</span><br>
+				<label for="friction-function" class="number-text">F<sub>k</sub>(v) = </label>
+				<input id="friction-function" class="formula-input" type="text" name="friction-function" value="1">
+				<button onclick="updateGraphOutput()">Submit</button>
+			</div>
+
 			<h3>Simulation Parameters</h3>
 			<div>
 				<ul>
@@ -106,6 +114,9 @@
 					</label></li>
 					<li><label for="sim-force-limit">
 						Limit max thrust to <input id="sim-force-limit" class="number-input" type="number" name="sim-force-limit" value="10" /> Newtons
+					</label></li>
+					<li><label for="sim-fs">
+						F<sub>static</sub> = <input id="sim-fs" class="number-input" type="number" name="sim-fs" value="3" /> Newtons
 					</label></li>
 				</ul>
 				<button onclick="updateSimulationParams()">Update</button>

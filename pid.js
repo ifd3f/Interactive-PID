@@ -27,7 +27,7 @@ const SCALE_SETTINGS = {
 
 var DURATION, FREQUENCY, SAMPLING, MAX_FORCE, mass;
 
-var target = "1";
+var target, fricK;
 
 var ctxPos, ctxVel, ctxForce, graphPos, graphVel, graphForce;
 
@@ -100,7 +100,15 @@ function simulate(args) {
         const deriv = dtarget(t);
         const raw = pid.push(target - x, dt) + args.pid.f * deriv;
 
-        const force = Math.min(Math.max(raw, -args.forceLimit), args.forceLimit);  // Constrain the force
+        const thrust = Math.min(Math.max(raw, -args.forceLimit), args.forceLimit);  // Constrain the force
+        var force;
+        if (Math.abs(v) < EPSILON && thrust < args.Fs) {  // Requirement for static friction (not moving and not enough force)
+            force = 0;  
+        } else {  // Otherwise, use kinetic friction
+            var fMag = Math.abs(thrust) - args.Fk(v);
+            force = Math.sign(thrust) * fMag;
+        }
+
         const acc = force / args.mass;
         v += force * dt;
         x += v * dt;
@@ -127,6 +135,7 @@ function copyInto(from, to) {
 function updateGraphOutput() {
     var startTime = new Date().getMilliseconds();
     target = $("#target-function").val();
+    fricK = $("#friction-function").val();
 
     var pid = {
         p: $("#p-slider").val(),
@@ -149,7 +158,11 @@ function updateGraphOutput() {
         mass: mass,
         duration: DURATION,
         frequency: FREQUENCY,
-        forceLimit: MAX_FORCE
+        forceLimit: MAX_FORCE,
+        Fs: parseFloat($("#sim-fs").val()),
+        Fk: function(v) { 
+            return eval(fricK);
+        }
     };
 
     var output = simulate(simulationArgs);
@@ -300,6 +313,12 @@ $(function() {
     });
 
     $("#target-function").on("keydown", function(e) {
+        if (e.keyCode == 13) {
+            updateGraphOutput();
+        }
+    });
+
+    $("#friction-function").on("keydown", function(e) {
         if (e.keyCode == 13) {
             updateGraphOutput();
         }
